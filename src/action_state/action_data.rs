@@ -1,9 +1,10 @@
 //! Contains types used to store the state of the actions held in an [`ActionState`](super::ActionState).
 
+use std::time::Instant;
+
 use bevy::{
     math::{Vec2, Vec3},
     reflect::Reflect,
-    utils::Instant,
 };
 use serde::{Deserialize, Serialize};
 

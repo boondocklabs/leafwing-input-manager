@@ -42,9 +42,7 @@ fn setup(mut commands: Commands) {
     ));
 }
 
-fn zoom_camera(
-    mut query: Query<(&mut OrthographicProjection, &ActionState<CameraMovement>), With<Camera2d>>,
-) {
+fn zoom_camera(mut query: Query<(&mut Projection, &ActionState<CameraMovement>), With<Camera2d>>) {
     const CAMERA_ZOOM_RATE: f32 = 0.05;
 
     let (mut camera_projection, action_state) = query.single_mut();
@@ -52,10 +50,12 @@ fn zoom_camera(
     // Up and right axis movements are always positive by default
     let zoom_delta = action_state.value(&CameraMovement::Zoom);
 
-    // We want to zoom in when we use mouse wheel up,
-    // so we increase the scale proportionally
-    // Note that the projection's scale should always be positive (or our images will flip)
-    camera_projection.scale *= 1. - zoom_delta * CAMERA_ZOOM_RATE;
+    if let Projection::Orthographic(camera_projection) = &mut *camera_projection {
+        // We want to zoom in when we use mouse wheel up,
+        // so we increase the scale proportionally
+        // Note that the projection's scale should always be positive (or our images will flip)
+        camera_projection.scale *= 1. - zoom_delta * CAMERA_ZOOM_RATE;
+    };
 }
 
 fn pan_camera(mut query: Query<(&mut Transform, &ActionState<CameraMovement>), With<Camera2d>>) {

@@ -1,6 +1,6 @@
 //! Demonstrates how to register gamepads in local multiplayer fashion
 
-use bevy::{prelude::*, utils::HashMap};
+use bevy::{platform_support::collections::HashMap, prelude::*};
 use leafwing_input_manager::prelude::*;
 
 fn main() {
@@ -60,9 +60,7 @@ fn join(
 
                 // Insert the created player and its gamepad to the hashmap of joined players
                 // Since uniqueness was already checked above, we can insert here unchecked
-                joined_players
-                    .0
-                    .insert_unique_unchecked(gamepad_entity, player);
+                joined_players.0.insert(gamepad_entity, player);
             }
         }
     }

@@ -7,9 +7,9 @@ use bevy::{
     app::{App, PreUpdate},
     ecs::system::{StaticSystemParam, SystemParam},
     math::{Vec2, Vec3},
+    platform_support::collections::{HashMap, HashSet},
     prelude::{IntoSystemConfigs, ResMut, Resource},
     reflect::Reflect,
-    utils::{HashMap, HashSet},
 };
 
 use super::{Axislike, Buttonlike, DualAxislike, TripleAxislike};
@@ -52,7 +52,7 @@ impl CentralInputStore {
         let updated_values = self
             .updated_values
             .entry(TypeId::of::<B>())
-            .or_insert_with(|| UpdatedValues::Buttonlike(HashMap::new()));
+            .or_insert_with(|| UpdatedValues::Buttonlike(HashMap::default()));
 
         let UpdatedValues::Buttonlike(buttonlikes) = updated_values else {
             panic!("Expected Buttonlike, found {:?}", updated_values);
@@ -66,7 +66,7 @@ impl CentralInputStore {
         let updated_values = self
             .updated_values
             .entry(TypeId::of::<A>())
-            .or_insert_with(|| UpdatedValues::Axislike(HashMap::new()));
+            .or_insert_with(|| UpdatedValues::Axislike(HashMap::default()));
 
         let UpdatedValues::Axislike(axislikes) = updated_values else {
             panic!("Expected Axislike, found {:?}", updated_values);
@@ -80,7 +80,7 @@ impl CentralInputStore {
         let updated_values = self
             .updated_values
             .entry(TypeId::of::<D>())
-            .or_insert_with(|| UpdatedValues::Dualaxislike(HashMap::new()));
+            .or_insert_with(|| UpdatedValues::Dualaxislike(HashMap::default()));
 
         let UpdatedValues::Dualaxislike(dualaxislikes) = updated_values else {
             panic!("Expected DualAxislike, found {:?}", updated_values);
@@ -94,7 +94,7 @@ impl CentralInputStore {
         let updated_values = self
             .updated_values
             .entry(TypeId::of::<T>())
-            .or_insert_with(|| UpdatedValues::Tripleaxislike(HashMap::new()));
+            .or_insert_with(|| UpdatedValues::Tripleaxislike(HashMap::default()));
 
         let UpdatedValues::Tripleaxislike(tripleaxislikes) = updated_values else {
             panic!("Expected TripleAxislike, found {:?}", updated_values);
@@ -279,10 +279,10 @@ enum UpdatedValues {
 impl UpdatedValues {
     fn from_input_control_kind(kind: InputControlKind) -> Self {
         match kind {
-            InputControlKind::Button => Self::Buttonlike(HashMap::new()),
-            InputControlKind::Axis => Self::Axislike(HashMap::new()),
-            InputControlKind::DualAxis => Self::Dualaxislike(HashMap::new()),
-            InputControlKind::TripleAxis => Self::Tripleaxislike(HashMap::new()),
+            InputControlKind::Button => Self::Buttonlike(HashMap::default()),
+            InputControlKind::Axis => Self::Axislike(HashMap::default()),
+            InputControlKind::DualAxis => Self::Dualaxislike(HashMap::default()),
+            InputControlKind::TripleAxis => Self::Tripleaxislike(HashMap::default()),
         }
     }
 }

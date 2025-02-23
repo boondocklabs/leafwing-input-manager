@@ -1,14 +1,16 @@
 //! This module contains [`ActionState`] and its supporting methods and impls.
 
+use std::time::Instant;
+
 use crate::input_map::UpdatedValue;
 use crate::{action_diff::ActionDiff, input_map::UpdatedActions};
 use crate::{Actionlike, InputControlKind};
 
+use bevy::platform_support::collections::HashMap;
 use bevy::prelude::Resource;
 use bevy::reflect::Reflect;
 #[cfg(feature = "timing")]
 use bevy::utils::Duration;
-use bevy::utils::{HashMap, Instant};
 use bevy::{ecs::component::Component, prelude::ReflectComponent};
 use bevy::{
     math::{Vec2, Vec3},
@@ -677,7 +679,7 @@ impl<A: Actionlike> ActionState<A> {
     }
 
     /// Get the [`Vec2`] associated with the corresponding `action`, clamped to `[-1.0, 1.0]`.
-    ///  
+    ///
     /// # Warning
     ///
     /// This value will be [`Vec2::ZERO`] by default,

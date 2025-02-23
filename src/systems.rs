@@ -1,5 +1,7 @@
 //! The systems that power each [`InputManagerPlugin`](crate::plugin::InputManagerPlugin).
 
+use std::time::Instant;
+
 use crate::prelude::updating::CentralInputStore;
 use bevy::ecs::query::QueryFilter;
 use bevy::log::debug;
@@ -10,10 +12,7 @@ use crate::{
 
 use bevy::ecs::prelude::*;
 use bevy::prelude::Gamepad;
-use bevy::{
-    time::{Real, Time},
-    utils::Instant,
-};
+use bevy::time::{Real, Time};
 
 use crate::action_diff::{ActionDiffEvent, SummarizedActionState};
 
