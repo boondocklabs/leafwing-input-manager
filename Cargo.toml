@@ -30,7 +30,7 @@ mouse = []
 keyboard = []
 
 # Adds support for gamepad-based inputs.
-gamepad = ["bevy/bevy_gilrs"]
+gamepad = []
 
 # Allow using the `InputMap` as `bevy::asset::Asset`.
 asset = ['bevy/bevy_asset']
