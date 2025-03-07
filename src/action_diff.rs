@@ -359,7 +359,7 @@ impl<A: Actionlike> SummarizedActionState<A> {
             let action_diffs = self.entity_diffs(&entity, previous);
 
             if !action_diffs.is_empty() {
-                writer.send(ActionDiffEvent {
+                writer.write(ActionDiffEvent {
                     owner,
                     action_diffs,
                 });

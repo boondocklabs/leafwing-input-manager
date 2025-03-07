@@ -34,7 +34,7 @@ fn setup(mut commands: Commands) {
 fn pan_camera(mut query: Query<(&mut Transform, &ActionState<CameraMovement>), With<Camera2d>>) {
     const CAMERA_PAN_RATE: f32 = 0.5;
 
-    let (mut camera_transform, action_state) = query.single_mut();
+    let (mut camera_transform, action_state) = query.single_mut().unwrap();
 
     let camera_pan_vector = action_state.axis_pair(&CameraMovement::Pan);
 

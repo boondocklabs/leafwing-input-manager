@@ -53,7 +53,7 @@ fn spawn_player(mut commands: Commands) {
 }
 
 fn check_data(query: Query<&ActionState<Action>, With<Player>>) {
-    let action_state = query.single();
+    let action_state = query.single().unwrap();
     for action in action_state.get_pressed() {
         println!(
             "Pressed {action:?} with data: {:?}",

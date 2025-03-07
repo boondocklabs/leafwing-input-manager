@@ -45,7 +45,7 @@ fn setup(mut commands: Commands) {
 fn zoom_camera(mut query: Query<(&mut Projection, &ActionState<CameraMovement>), With<Camera2d>>) {
     const CAMERA_ZOOM_RATE: f32 = 0.05;
 
-    let (mut camera_projection, action_state) = query.single_mut();
+    let (mut camera_projection, action_state) = query.single_mut().unwrap();
     // Here, we use the `action_value` method to extract the total net amount that the mouse wheel has travelled
     // Up and right axis movements are always positive by default
     let zoom_delta = action_state.value(&CameraMovement::Zoom);
@@ -61,7 +61,7 @@ fn zoom_camera(mut query: Query<(&mut Projection, &ActionState<CameraMovement>),
 fn pan_camera(mut query: Query<(&mut Transform, &ActionState<CameraMovement>), With<Camera2d>>) {
     const CAMERA_PAN_RATE: f32 = 10.;
 
-    let (mut camera_transform, action_state) = query.single_mut();
+    let (mut camera_transform, action_state) = query.single_mut().unwrap();
 
     // When using the `MouseScrollDirection` type, mouse wheel inputs can be treated like simple buttons
     if action_state.pressed(&CameraMovement::PanLeft) {

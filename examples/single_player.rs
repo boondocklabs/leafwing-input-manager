@@ -115,7 +115,7 @@ fn spawn_player(mut commands: Commands) {
 }
 
 fn cast_fireball(query: Query<&ActionState<ArpgAction>, With<Player>>) {
-    let action_state = query.single();
+    let action_state = query.single().unwrap();
 
     if action_state.just_pressed(&ArpgAction::Ability1) {
         println!("Fwoosh!");
@@ -123,7 +123,7 @@ fn cast_fireball(query: Query<&ActionState<ArpgAction>, With<Player>>) {
 }
 
 fn player_dash(query: Query<&ActionState<ArpgAction>, With<Player>>) {
-    let action_state = query.single();
+    let action_state = query.single().unwrap();
 
     if action_state.just_pressed(&ArpgAction::Ability4) {
         let mut direction_vector = Vec2::ZERO;
@@ -155,7 +155,7 @@ fn player_walks(
     query: Query<&ActionState<ArpgAction>, With<Player>>,
     mut event_writer: EventWriter<PlayerWalk>,
 ) {
-    let action_state = query.single();
+    let action_state = query.single().unwrap();
 
     let mut direction_vector = Vec2::ZERO;
 
@@ -172,6 +172,6 @@ fn player_walks(
     let net_direction = Dir2::new(direction_vector);
 
     if let Ok(direction) = net_direction {
-        event_writer.send(PlayerWalk { direction });
+        event_writer.write(PlayerWalk { direction });
     }
 }

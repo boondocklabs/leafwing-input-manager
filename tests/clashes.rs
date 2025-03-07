@@ -93,7 +93,7 @@ impl ClashTestExt for App {
 
         let (input_map_query, central_input_store) = input_system_state.get(self.world());
 
-        let input_map = input_map_query.single();
+        let input_map = input_map_query.single().unwrap();
         let keyboard_input = self.world().resource::<ButtonInput<KeyCode>>();
 
         for action in Action::variants() {

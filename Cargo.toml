@@ -62,6 +62,9 @@ dyn-hash = "0.2"
 
 [dev-dependencies]
 bevy = { git = "https://github.com/boondocklabs/bevy", branch = "dev", default-features = false, features = [
+    "std",
+    "async_executor",
+    "bevy_log",
     "bevy_asset",
     "bevy_sprite",
     "bevy_text",

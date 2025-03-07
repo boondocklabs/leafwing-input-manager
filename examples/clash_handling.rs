@@ -50,6 +50,6 @@ fn spawn_input_map(mut commands: Commands) {
 fn report_pressed_actions(
     query: Query<&ActionState<TestAction>, Changed<ActionState<TestAction>>>,
 ) {
-    let action_state = query.single();
+    let action_state = query.single().unwrap();
     dbg!(action_state.get_just_pressed());
 }
