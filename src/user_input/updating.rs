@@ -5,10 +5,13 @@ use std::hash::Hash;
 
 use bevy::{
     app::{App, PreUpdate},
-    ecs::system::{StaticSystemParam, SystemParam},
+    ecs::{
+        schedule::IntoScheduleConfigs as _,
+        system::{StaticSystemParam, SystemParam},
+    },
     math::{Vec2, Vec3},
     platform_support::collections::{HashMap, HashSet},
-    prelude::{IntoSystemConfigs, ResMut, Resource},
+    prelude::{ResMut, Resource},
     reflect::Reflect,
 };
 

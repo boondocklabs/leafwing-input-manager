@@ -5,9 +5,6 @@ use bevy::prelude::Reflect;
 use leafwing_input_manager::Actionlike;
 
 #[derive(Actionlike, Debug, Hash, PartialEq, Eq, Clone, Copy, Reflect)]
-enum UnitAction {}
-
-#[derive(Actionlike, Debug, Hash, PartialEq, Eq, Clone, Copy, Reflect)]
 enum OneAction {
     Jump,
 }
